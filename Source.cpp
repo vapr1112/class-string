@@ -53,6 +53,9 @@ int main()
 
 	} while (user != 0);
 
+	strings str1{ str_factory(16) };//проверяется работа конструктора перемещения
+
+	str1.print();
 
 	return 0;
 }
