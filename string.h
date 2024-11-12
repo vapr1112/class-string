@@ -16,19 +16,26 @@ private:
 
 public:
 
-	strings(const char* str_p, const int size_p); // главный конструктор, сoздает строку и инициализирует ее
+	// главный конструктор, сoздает строку и инициализирует ее
+	strings(const char* str_p, const int size_p); 
 
-	strings() : strings(nullptr, 80) {}; //конструктор, создающий строку, длинной 80
+	//конструктор, создающий строку, длинной 80
+	strings() : strings(nullptr, 80) {}; 
 
-	strings(const int size_p) : strings(nullptr, size_p) {}; //конструктор, создающий строку длинной, указанной пользователем
+	//конструктор, создающий строку длинной, указанной пользователем
+	strings(const int size_p) : strings(nullptr, size_p) {}; 
 
-	strings(const strings& str_p);//конструктор копирования
+	//конструктор копирования
+	strings(const strings& str_p);
 	
-	strings(strings&& str_p);//конструктор переноса
+	//конструктор переноса
+	strings(strings&& str_p);
+
+	explicit strings(const char* str_p) : strings(nullptr, strlen(str_p) + 1) {}
 
 	void set_str(const char* str_p);
 
-	void set_size(int size_p)
+	void set_size(const int size_p)
 	{
 		size = size_p;
 
@@ -52,30 +59,25 @@ public:
 		cout << "размер строки " << size << "\n";
 	}
 
-	static int show_count() //возвращает количество обЬектов класса
+	//возвращает количество обЬектов класса
+	static int show_count() 
 	{
 		return count;
 	}
 
-	void set_str_adress(char* adress_str, const char* entered_string)//меняет подстроку в строке на указанную подстроку
-	{
-		const char* ptr = "\0";//создается указатель на \0
-		char symbol = adress_str[strlen(entered_string)];//сохраняется символ следующий после подстроки
-		adress_str[strlen(entered_string)] = *(ptr);//строка обрезается до подстроки 
-
-		strcpy_s(adress_str, strlen(entered_string) + 1, entered_string);//копируется в подстроку 1 подстрока 2
-		adress_str[strlen(adress_str)] = symbol;//возвращается сохраненный символ на место \0
-	}
+	//меняет подстроку в строке на указанную подстроку
+	void set_str_adress(char* adress_str, const char* entered_string);
 
 	//перегрузка специальных операторов
 
-	char operator[](int idx)const
+	char operator[](const int idx)const
 	{
-		assert(idx > 0 && idx < size && "\nнедопустимый индекс");//assert дает возможность отслеживать недопустимый индекс, взят из методички
+		//assert дает возможность отслеживать недопустимый индекс, взят из методички
+		assert(idx > 0 && idx < size && "\nнедопустимый индекс");
 		return str[idx];
 	}
 
-	char& operator[](int idx)
+	char& operator[](const int idx)
 	{
 		assert(idx > 0 && idx < size && "\nнедопустимый индекс");
 		return str[idx];
@@ -83,12 +85,16 @@ public:
 
 	char* operator[](const char* str_p)
 	{
-		char* idx{ strstr(str, str_p) };//ищется подстрока в строке, сохраняется указатель
-		char* buf_str = new char[strlen(str_p) + 1];//создается буферная строка
+		//ищется подстрока в строке, сохраняется указатель
+		char* idx{ strstr(str, str_p) };
+		//создается буферная строка
+		char* buf_str = new char[strlen(str_p) + 1];
 		if (idx != 0)
 		{
-			buf_str = idx;//в буферную строку копируется указатель на подстроку
-			return buf_str;//возвращается буферная строка
+			//в буферную строку копируется указатель на подстроку
+			buf_str = idx;
+			//возвращается буферная строка
+			return buf_str;
 		}
 	}
 
@@ -107,14 +113,18 @@ public:
 	{
 		if (strchr(str, symbol) != 0)
 		{
-			char* buf_str = new char[size];//создается буферная строка, в которую копируется значение из str
+			//создается буферная строка, в которую копируется значение из str
+			char* buf_str = new char[size];
 			strcpy_s(buf_str, size, str);
 
-			const char* ptr = "\0";//создается указатель на \0
+			//создается указатель на \0
+			const char* ptr = "\0";
 
-			*(strchr(buf_str, symbol)) = *(ptr);// на месте переданного символа в буферной ставится \0
+			// на месте переданного символа в буферной ставится \0
+			*(strchr(buf_str, symbol)) = *(ptr);
 
-			int index = strlen(buf_str);//размер полученной буферной строки и есть индекс искомого символа
+			//размер полученной буферной строки и есть индекс искомого символа
+			int index = strlen(buf_str);
 
 			delete[] buf_str;
 

@@ -28,12 +28,14 @@ int main()
 			mas_str = create_str_3(mas_str, size);
 			break;
 		case SEE_COUNT:
-			cout << "\nколичесво строк " << mas_str->show_count() << "\n";//показывает количество созданных объектов
+			//показывает количество созданных объектов
+			cout << "\nколичесво строк " << mas_str->show_count() << "\n";
 			break;
 		case SEE_STR:
 			for (int i = 0; i < size; i++)
 			{
-				mas_str[i].print(); //показывает строки и их размеры
+				//показывает строки и их размеры
+				mas_str[i].print(); 
 			}
 			break;
 		case INPUT:
@@ -53,19 +55,26 @@ int main()
 
 	} while (user != 0);
 
-	strings str1{ str_factory(16) };//проверяется работа конструктора перемещения
+	//проверяется работа конструктора перемещения
+	strings str1{ str_factory(16) };
 
 	str1.print();
 
 	cout << "\nсимвол под третьим индексом данной строки " << str1[3] << "\n";
 
-	const char str[3]{ "ll" };//подстрока, которая ищется в строке
-	const char str_2[3]{ "!!" };//подстрока которая заменит подстроку str в строке
-	if (strlen(str) == strlen(str_2))//проверка на их равенство
-	{
-		str1.set_str_adress(str1[str], str_2);//в случае их равенства происходит замещение str_2 на str
+	//подстрока, которая ищется в строке
+	const char str[3]{ "ll" };
 
-		str1.print();//в данном примере вместо hello world!!! выведется he!!o world!!!
+	//подстрока которая заменит подстроку str в строке
+	const char str_2[3]{ "!!" };
+	//проверка на их равенство
+	if (strlen(str) == strlen(str_2))
+	{
+		//в случае их равенства происходит замещение str_2 на str
+		str1.set_str_adress(str1[str], str_2);
+
+		//в данном примере вместо hello world!!! выведется he!!o world!!!
+		str1.print();
 	}
 
 	cout << "индекс символа o равен " << str1('o');

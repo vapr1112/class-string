@@ -59,8 +59,8 @@ strings* create_str_3(strings* mas_str, int& size)//функция добавляет в массив с
 
 	return new_mas_str;
 }
-
-strings str_factory(int size_p)//функция возвращает массив, с помощью нее проверяется работа конструктора перемещения
+//функция возвращает массив, с помощью нее проверяется работа конструктора перемещения
+strings str_factory(int size_p)
 {
 	strings str_p;
 
